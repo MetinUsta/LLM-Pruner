@@ -343,7 +343,7 @@ def main(args):
 
     if args.save_model:
         model.half()
-        save_pruned_model(model, tokenizer, logger.best_checkpoint_path)
+        save_pruned_model(model, tokenizer, args.output_dir)
 
     if args.eval_device != "cpu":
         model.half()
@@ -490,6 +490,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--seed", type=int, default=42, help="seed")
     parser.add_argument("--save_model", action="store_true", help="if save model")
+
+    parser.add_argument("--output_dir", type=str, default="output", help="output dir")
     args = parser.parse_args()
 
     torch_version = float(".".join(torch.__version__.split(".")[:2]))
